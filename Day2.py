@@ -50,10 +50,10 @@ def copyall(directory, copyfile):
                 print(f"Error reading file {item}: {e}")
 
 with open(copypath, "wt") as copyfile:  # Open file in write mode
+     copyall(r"C:\Users\Sreya\handson", copyfile)
 
 
-
-###################
+###################o/p############
 hello world
 hello world
 hello world
@@ -61,5 +61,3 @@ hello world
 hello world
 
 --- End of File ---
-
-    copyall(r"C:\Users\Sreya\handson", copyfile)
