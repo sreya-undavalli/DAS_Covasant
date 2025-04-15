@@ -30,21 +30,24 @@ print(max_file(directory,"no file is present in the directory",0)[1])
 
 
 
-copypath=r"C:\Users\Sreya\copyfile.txt"
-filter="txt"
-def copyall(directory,copyfile):
-    directory_path=directory+r"\*"
-    filter_files=[items for items in glob.glob(f"{directory}//*.{filter}")]
-    items=glob.glob(directory_path)
+copypath = r"C:\Users\Sreya\copyfile.txt"
+filter = "txt"
+import glob
+import os
+def copyall(directory, copyfile):
+    directory_path = directory + r"\*"  # Consistent path handling
+    items = glob.glob(directory_path)  # Retrieve all items in the directory
+    
     for item in items:
-        if(os.path.isdir(item)):
-           copyall(item,copyfile)
-        else:
-            if item in filter_files:
-                with open(item,"rt") as f1:
+        if os.path.isdir(item):  # Check if it's a directory
+            copyall(item, copyfile)  # Recursive call for subdirectories
+        elif item.endswith(f".{filter}"):  # Check file extension directly
+            try:
+                with open(item, "rt") as f1:
                     copyfile.write(f1.read())
-    pass
+                    copyfile.write("\n--- End of File ---\n")  # Separator for clarity
+            except Exception as e:
+                print(f"Error reading file {item}: {e}")
 
-
-with open(copypath,"at") as copyfile:
-    copyall(directory,copyfile)
+with open(copypath, "wt") as copyfile:  # Open file in write mode
+    copyall(r"C:\Users\Sreya\handson", copyfile)
