@@ -93,4 +93,4 @@ def fetch_forecast(city):
     return jsonify({city: {"forecast": city_data}})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
